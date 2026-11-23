@@ -765,6 +765,13 @@ div.hero.cov.cov .cvme{order:6;margin:20px 0 0!important}
 .kz-slide.gx svg{max-width:100%;height:auto}
 .kz-slide.gx .tbl td:last-child:has(svg){width:42%}
 .kz-slide.gx .tbl td:last-child .fig svg{min-width:150px}
+
+#kz-pres .pp.sc{overflow-y:auto!important;align-items:flex-start!important}
+#kz-pres .pp .kz-slide.gx{height:auto}
+#kz-pres .pp .kz-slide.gx .fig svg{max-height:36cqh;width:100%;height:auto}
+#kz-pres .pp .kz-slide.gx .fig.s svg{max-height:30cqh}
+#kz-pres .pp .kz-slide.gx .tbl .fig svg{max-height:15cqh;min-width:0}
+#kz-pres .pp .kz-slide.gx .tbl .fig{margin:0;padding:0}
 </style></head><body>
 <div class="gb-top"><div class="gb-pill"><span>إعداد وتصميم:</span> <b>المعلمة ناهد سليمان</b></div><div class="gb-pill">نتعلم . نبدع . نتفوق</div></div>
 <div class="wrap" id="app"></div>
@@ -1431,11 +1438,15 @@ function deckHTML(){SLIDES=mkSlides();return (INREC?'':deckBar())+`<div class="k
 /* ---- وضع العرض (مطابق لعرض زوم) ---- */
 let o2,PR={i:0,s:0};
 const POV=()=>document.getElementById('kz-pres');
-function fitRec(o){const sl=o.querySelector('.slot .kz-slide');if(!sl)return;const si=sl.querySelector('.si'),sb=sl.querySelector('.sb');
+function fitRec0(o){const sl=o.querySelector('.slot .kz-slide');if(!sl)return;const si=sl.querySelector('.si'),sb=sl.querySelector('.sb');
  si.style.zoom='';if(!o.classList.contains('rec')){sl.style.removeProperty('--k');return}
  const over=()=>{const r=sb.getBoundingClientRect();return sb.scrollHeight>sb.clientHeight+2||[...sb.querySelectorAll('*')].some(e=>{const q=e.getBoundingClientRect();return q.height&&(q.bottom>r.bottom+2||q.right>r.right+2||q.left<r.left-2)})};
  let k=2.6;sl.style.setProperty('--k',k);while(k>1&&over()){k=Math.round((k-0.1)*10)/10;sl.style.setProperty('--k',k)}
  let z=1.6;si.style.zoom=z;while(z>1&&over()){z=Math.round((z-0.1)*10)/10;si.style.zoom=z}if(z<=1)si.style.zoom=''}
+function fitRec(o){fitRec0(o);const sl=o.querySelector('.slot .kz-slide');if(!sl||!sl.classList.contains('gx'))return;const si=sl.querySelector('.si'),pp=o.querySelector('.pp');if(!si||!pp)return;pp.classList.remove('sc');
+ let z=parseFloat(si.style.zoom)||1;const ov=()=>{const r=si.getBoundingClientRect();return r.height>pp.clientHeight-4||r.width>pp.clientWidth+2};
+ while(ov()&&z>0.45){z=Math.round((z-0.05)*100)/100;si.style.zoom=z}
+ if(ov())pp.classList.add('sc')}
 function presShow(){const o=POV();o.querySelector('.slot').innerHTML=SLIDES[PR.i];
  o.querySelectorAll('.kst').forEach((e,k)=>{if(k<PR.s)e.classList.add('on')});
  const c=o.querySelector('.cnt');c.setAttribute('dir','ltr');c.textContent=(PR.i+1)+' / '+SLIDES.length;o.querySelector('.numb').textContent=PR.i+1;fitRec(o)}
