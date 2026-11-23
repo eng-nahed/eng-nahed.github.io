@@ -757,6 +757,14 @@ div.hero.cov.cov .cvme{order:6;margin:20px 0 0!important}
 .kz-slide.gx .pill{display:inline-block;background:#05ABFF;color:#fff;border-radius:999px;padding:0 16px;font-weight:800;margin-bottom:4px}
 .kz-slide.gx .m{direction:ltr;unicode-bidi:isolate;display:inline-block}
 @media(max-width:640px){.kz-slide.gx .sh{font-size:17px}.kz-slide.gx .sb{font-size:16px}.kz-slide.gx .tbl{min-width:460px}}
+.kz-slide.gx .tw{overflow:visible}
+.kz-slide.gx .tbl{min-width:0!important;table-layout:auto}
+.kz-slide.gx .tbl td,.kz-slide.gx .tbl th{white-space:normal!important;overflow-wrap:anywhere;max-width:100%}
+.kz-slide.gx .tbl td .m{white-space:normal;display:inline}
+.kz-slide.gx .tbl .fig svg{max-width:100%;width:100%;height:auto}
+.kz-slide.gx svg{max-width:100%;height:auto}
+.kz-slide.gx .tbl td:last-child:has(svg){width:42%}
+.kz-slide.gx .tbl td:last-child .fig svg{min-width:150px}
 </style></head><body>
 <div class="gb-top"><div class="gb-pill"><span>إعداد وتصميم:</span> <b>المعلمة ناهد سليمان</b></div><div class="gb-pill">نتعلم . نبدع . نتفوق</div></div>
 <div class="wrap" id="app"></div>
@@ -4766,7 +4774,7 @@ const PQ={
  bld:()=>T('اسحب القطع الملوّنة المطلوبة إلى الشكل ثم اضغط «تحقق»','Gereken boyalı parçaları şekle sürükle, sonra «Kontrol et»e bas','Drag the needed colored pieces into the figure, then press “Check”','גררו את החלקים הצבועים הנדרשים לצורה ולחצו על «בדיקה»','Ziehe die nötigen gefärbten Teile in die Figur und drücke „Prüfen“','Sleep de nodige gekleurde stukjes in de figuur en druk op “Controleer”')};
 Object.keys(PQ).forEach(k=>{const f=PQ[k];PQ[k]=()=>{const p=GM.def&&GM.def.p;return Array.isArray(p)?T(...p):f()}});
 const DR=()=>/^(ar|he)$/.test(LANG)?'rtl':'ltr';
-const VK=v=>(v&&typeof v==='object'&&v.id!==undefined)?v.id:v;
+const VK=v=>{const r=(v&&typeof v==='object'&&v.id!==undefined)?v.id:v;return typeof r==='string'?r.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):r};
 const ISTX=v=>Array.isArray(v)||(v&&typeof v==='object'&&v.t)||(typeof v==='string'&&/[A-Za-z\u0600-\u06FF\u0590-\u05FF]/.test(v));
 const V=v=>ISTX(v)?`<span class="gw">${X(v&&v.t?v.t:v)}</span>`:M(v);
 function lgMenu(){return `<div class="gm-menu">${LGS().map((s,i)=>`<button type="button" class="gm-pick" data-gl="${i}"><span class="gm-ico">${s.ico}</span><h3>${T(...s.t)}</h3><p>${T(...s.d)}</p><span class="go">${T('ابدأ','Başla','Start','התחילו','Los','Start')}</span></button>`).join('')}</div>`}
